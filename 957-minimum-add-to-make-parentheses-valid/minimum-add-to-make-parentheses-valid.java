@@ -1,26 +1,30 @@
 class Solution {
     public int minAddToMakeValid(String s) {
+        //without using stack will use two pointers but diff way
 
-        Stack<Character> stack = new Stack<>();
+        int left =0;
+        int right=0;
+
+        int y=0;
 
         for(char c : s.toCharArray())
         {
             if(c=='(')
             {
-                stack.push(c);
+                left++;
             }
             else
             {
-                if(!stack.isEmpty() && stack.peek()=='(')
+                if(left >0 && c==')')
                 {
-                    stack.pop();
+                    left--;
                 }
                 else
                 {
-                    stack.push(c);
+                    right++;
                 }
             }
         }
-        return stack.size();
+        return left + right;
     }
 }
